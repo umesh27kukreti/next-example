@@ -12,11 +12,11 @@ const ClientSide = () => {
   }, []);
 
   const getData = async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await fetch("http://localhost:3005/api/users");
 
     const data = await response.json();
 
-    return data;
+    return data.recordset;
   };
 
   return (
@@ -31,9 +31,14 @@ const ClientSide = () => {
             <div>
               {posts.map((item, index) => {
                 return (
-                  <Link href={`/client-side-path?postid=${item.id}&tabIndex=0`}>
+                  <Link
+                    href={`/client-side-path?postid=${item.user_id}&tabIndex=0`}
+                  >
                     <div key={index.toString()} className="card p-3 m-1">
-                      <p>{item.title}</p>
+                      <p>
+                        {item.first_name} {item.first_name}
+                      </p>
+                      <p>{item.phone_no}</p>
                     </div>
                   </Link>
                 );

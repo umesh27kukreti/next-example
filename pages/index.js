@@ -18,6 +18,19 @@ const Home = () => {
       <Link href={"/client-side-path"}>
         <button className="outlined">Go to client side page</button>
       </Link>
+
+      {/* <Link href={"/client-side-path"}> */}
+      {/* {!keycloak.authenticated ? ( */}
+      <button
+        onClick={() => {
+          // keycloak.login();
+        }}
+        className="outlined"
+      >
+        Login
+      </button>
+      {/* ) : null} */}
+      {/* </Link> */}
     </div>
   );
 };

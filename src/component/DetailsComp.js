@@ -20,7 +20,7 @@ function DetailsComp() {
   useEffect(() => {
     if (postid) {
       getPostDetails(postid).then((res) => {
-        setPostdetails(res);
+        if (res.recordset) setPostdetails(res.recordset[0]);
       });
     }
   }, [postid]);
@@ -32,15 +32,13 @@ function DetailsComp() {
   }, [tabIndex]);
 
   const getPostDetails = async (postid) => {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postid}`
-    );
+    const response = await fetch(`http://localhost:3005/api/users/${postid}`);
     const data = response.json();
 
     return data;
   };
 
-  console.log(value);
+  console.log({ postdetails });
   if (!postid) {
     return <div>click card to view details</div>;
   }
@@ -51,17 +49,17 @@ function DetailsComp() {
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Link
-                href={`/client-side-path?postid=${query.postid}&tabIndex=0`}
+                href={`/client-side-path?postid=${query.user_id}&tabIndex=0`}
               >
                 <Tab label="Item One" value="0" />
               </Link>
               <Link
-                href={`/client-side-path?postid=${query.postid}&tabIndex=1`}
+                href={`/client-side-path?postid=${query.user_id}&tabIndex=1`}
               >
                 <Tab label="Item Two" value="1" />
               </Link>
               <Link
-                href={`/client-side-path?postid=${query.postid}&tabIndex=2`}
+                href={`/client-side-path?postid=${query.user_id}&tabIndex=2`}
               >
                 <Tab label="Item Three" value="2" />
               </Link>
@@ -69,24 +67,24 @@ function DetailsComp() {
           </Box>
           <TabPanel value={0}>
             <h1>
-              Details{tabIndex} {query?.postid ?? ""}
+              Details{tabIndex} {query?.first_name ?? ""}
             </h1>
-            <p>{postdetails.title}</p>
-            <p>{postdetails.body}</p>{" "}
+            <p>{postdetails.first_name}</p>
+            <p>{postdetails.phone_no}</p>{" "}
           </TabPanel>
           <TabPanel value={1}>
             <h1>
-              Details{tabIndex} {query?.postid ?? ""}
+              Details{tabIndex} {query?.first_name ?? ""}
             </h1>
-            <p>{postdetails.title}</p>
-            <p>{postdetails.body}</p>{" "}
+            <p>{postdetails.first_name}</p>
+            <p>{postdetails.phone_no}</p>{" "}
           </TabPanel>
           <TabPanel value={2}>
             <h1>
-              Details{tabIndex} {query?.postid ?? ""}
+              Details{tabIndex} {query?.first_name ?? ""}
             </h1>
-            <p>{postdetails.title}</p>
-            <p>{postdetails.body}</p>
+            <p>{postdetails.first_name}</p>
+            <p>{postdetails.phone_no}</p>{" "}
           </TabPanel>
         </TabContext>
       </Box>
